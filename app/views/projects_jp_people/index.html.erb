@@ -1,0 +1,36 @@
+<div class="contextual">
+  <%= link_to l(:new_person),new_projects_jp_person_path(project_id: @project.identifier), class: 'icon icon-add' %>
+</div>
+
+<h2><%= l(:people_index) %></h2>
+<% if @people.empty? %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
+<% else %>
+
+  <table class="list">
+    <thead>
+      <%= sort_header_tag 'name', caption: l(:field_name)%>
+      <%= sort_header_tag 'kana', caption: l(:field_kana)%>
+      <th><%= l(:field_number)%></th>
+      <th><%= l(:field_mail_address)%></th>
+    </thead>
+    <% @people.each do |person| %>
+      <tr>
+        <td><%= link_to person.name, person %></td>
+        <td><%= person.kana %></td>
+        <td><%= person.jp_phone_numbers.first.number unless person.jp_phone_numbers.first == nil %></td>
+        <td><%= person.jp_e_mails.first.mail_address unless person.jp_e_mails.first == nil %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <p class="pagination">
+    <%= pagination_links_full @person_pages, @people_count %>
+  </p>
+<% end %> 
+
+<% content_for :sidebar do %>
+  <div></div>
+<% end %>
+
+<% html_title l(:people_index) %>

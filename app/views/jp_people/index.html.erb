@@ -1,0 +1,28 @@
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'jp_address', :plugin => 'redmine_jp_address' %>
+<% end %>
+
+<div class="contextual">
+  <% if @project == nil %>
+    <%= link_to l(:new_person), new_jp_person_path, class: 'icon icon-add' %>
+  <% else %>
+    <%= link_to l(:new_person), new_project_jp_person_path, class: 'icon icon-add' %>
+  <% end %>
+</div>
+
+<h2><%= l(:people_index) %></h2>
+<%= form_tag jp_people_search_path, remote: true, id: 'search_bar' do %>
+  <p>検索 <%= text_field_tag :q,'', size: 40 %></p>
+  <% if @project.present? %>
+    <%= hidden_field_tag :project_id, @project.id%>
+  <% end %>
+<% end %>
+<div id="index_table">
+  <%= render 'table_items' %>
+</div>
+
+<% content_for :sidebar do %>
+  <div></div>
+<% end %>
+
+<% html_title l(:people_index) %>

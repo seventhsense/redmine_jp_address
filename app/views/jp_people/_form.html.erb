@@ -1,0 +1,100 @@
+<%= nested_form_for(@person, html: {id: 'jp_person_form'}) do |f| %>
+  <% if @person.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= t(:prohibited_this_person_from_being_saved, error_count: @person.errors.count) %>:</h2>
+      <ul>
+        <% @person.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <legend><h3><%= l(:basic_info) %></h3></legend>
+    <div class="field box tabular">
+      <% if @project.present? %>
+        <% condition = @person.projects_jp_people.where(project_id: @project.id) %>
+        <% condition = nil if condition.blank? %>
+        <%= f.fields_for :projects_jp_people, condition %>
+      <% end %>
+      <p><%= f.label :name %><%= f.text_field :name,size: 50, :required => true %></p>
+      <p><%= f.label :kana %><%= f.text_field :kana, size: 50 %></p>
+      <p><%= f.label :is_corporate %><%= f.check_box :is_corporate %>
+      <span> *<%= l(:check_if_is_corporate)%></span></p>
+      <div id="is_corporate_field" class="hide">
+        <p><%= f.label :represent_katagaki %><%= f.text_field :represent_katagaki %></p>
+        <p><%= f.label :represent %><%= f.text_field :represent %></p>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><h3><%= l(:address_info) %></h3></legend>
+    <%= f.fields_for :jp_addresses %>
+    <p><%= f.link_to_add l(:add_address) , :jp_addresses, class: 'icon icon-add' %></p>
+  </fieldset>
+  <fieldset>
+    <legend><h3><%= l(:tel_info) %></h3></legend>
+    <%= f.fields_for :jp_phone_numbers %>
+    <p><%= f.link_to_add l(:add_phone_number) , :jp_phone_numbers, class: 'icon icon-add' %></p>
+  </fieldset>
+  <fieldset>
+    <legend><h3><%= l(:email_info) %></h3></legend>
+    <%= f.fields_for :jp_e_mails %>
+    <p><%= f.link_to_add l(:add_email_address) , :jp_e_mails, class: 'icon icon-add' %></p>
+  </fieldset>
+  <fieldset>
+    <legend><h3><%= l(:memo_info) %></h3></legend>
+    <%= f.text_area :memo,rows: 10, class: "wiki-edit" %>
+    <%= wikitoolbar_for 'jp_person_memo' %>
+    <%= preview_link(jp_people_preview_path(@person), 'jp_person_form') %>
+    <div id="preview" class="wiki"></div>
+  </fieldset>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  <%= javascript_include_tag 'jp_people_form.js', :plugin => 'redmine_jp_address' %>
+  <!--
+  <script type="text/javascript" src="//jpostal.googlecode.com/svn/trunk/jquery.jpostal.js"></script>
+  -->
+  <script>
+    $(document).ready(function(){
+      $.fn.autoKana('#jp_person_name', '#jp_person_kana', {katakana:false});
+      $('#jp_person_is_corporate').change(function(){
+        console.log('changed');
+        if ($(this).is(':checked')) {
+          $('#is_corporate_field').removeClass("hide");
+          $('#jp_person_represent_katagaki').val('')
+          $('#jp_person_represent').val('')
+        } else {
+          $('#is_corporate_field').addClass("hide");
+        }
+      })
+    });
+  /*
+   function get_id(field, class_name){
+     id = "#" + field.find(class_name).attr('id') 
+      return id
+   }
+  $(document).on('nested:fieldAdded', function(event){
+    var field = event.field;
+    var zip_code_id = get_id(field, '.zip_code');
+    if (zip_code_id == undefined){return false;}
+    var todofuken_id = get_id(field, '.todofuken');
+    console.log(todofuken_id);
+    var address1_id = get_id(field, '.address1');
+    var address2_id = get_id(field, '.address2');
+    var building_id = get_id(field, '.building');
+    $(zip_code_id).jpostal({
+      postcode: [zip_code_id],
+      address:  {
+        todofuken_id : "%3",
+        address1_id  : "%4%5"
+      }
+    });
+  })
+  */
+  </script> 
+<% end %>

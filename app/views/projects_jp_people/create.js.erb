@@ -1,0 +1,4 @@
+$('#modal_area').html('<%= escape_javascript(render :partial => 'modal_message', :locals => {:person => @person}) %>')
+  .hide()
+$('#dialog').dialog().show('blind')
+$('#projects_jp_people_table').html('<%= escape_javascript(render partial: 'projects_jp_people/index_table', locals: {person: @person}) %>')

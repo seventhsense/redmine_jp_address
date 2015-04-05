@@ -1,0 +1,34 @@
+<% if @people.empty? %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
+<% else %>
+  <table class="list">
+    <thead>
+      <% if @project.present? %>
+        <th><%= l(:field_pp_relationship) %></th>
+        <%= sort_header_tag 'jp_people.name', caption: l(:field_name)%>
+        <%= sort_header_tag 'jp_people.kana', caption: l(:field_kana)%>
+      <% else %>
+        <%= sort_header_tag 'name', caption: l(:field_name)%>
+        <%= sort_header_tag 'kana', caption: l(:field_kana)%>
+      <% end %>
+      <th><%= l(:field_number)%></th>
+      <th><%= l(:field_mail_address)%></th>
+    </thead>
+    <% @people.each do |person| %>
+      <tr>
+        <% if @project.present? %>
+          <td><%= person.projects_jp_people.find_by(project_id: @project.id).pp_relationship%></td>
+          <td><%= link_to person.name, project_jp_person_path(project_id: @project.id, id: person.id) %></td>
+        <% else %>
+          <td><%= link_to person.name, person %></td>
+        <% end %>
+        <td><%= person.kana %></td>
+        <td><%= person.jp_phone_numbers.first.number unless person.jp_phone_numbers.first == nil %></td>
+        <td><%= person.jp_e_mails.first.mail_address unless person.jp_e_mails.first == nil %></td>
+      </tr>
+    <% end %>
+  </table>
+  <p class="pagination">
+    <%= pagination_links_full @person_pages, @people_count %>
+  </p>
+<% end %> 

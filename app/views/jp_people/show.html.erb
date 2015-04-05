@@ -1,0 +1,80 @@
+<div class="contextual">
+  <% if @project.present? %>
+    <%= link_to l(:edit), edit_project_jp_person_path, class: 'icon icon-edit' %> | 
+  <% else %>
+    <%= link_to l(:edit), edit_jp_person_path, class: 'icon icon-edit' %> | 
+  <% end %>
+  <%= link_to l(:delete), @person, method: :delete,
+    data: { confirm: t(:delete_confirm_message, name: @person.name) }, 
+    class: 'icon icon-del' %> | 
+  <%= link_to l(:back), :back  %>
+</div>
+
+<h2><%= t(:show_person, name: @person.name) %></h2>
+<div class="box">
+  <legend><b><%= l(:basic_info) %></b></legend>
+  <p><%= @person.name %></p>
+  <p><%= @person.kana %></p>
+</div>
+<% if @person.jp_addresses.present? %>
+  <div class="box">
+    <legend><b><%= l(:address_info) %></b></legend>
+    <% @person.jp_addresses.each do |address| %>
+      <p><%= address.label %></p>
+      <p>〒 <%= address.zip_code %></p>
+      <p><%= address.todofuken %>
+      <%= address.address1 %>
+      <%= address.address2 %></p>
+    <p><%= address.building %></p>
+  <% end %>
+</div>
+ <% end %>
+ <% if @person.jp_phone_numbers.present? %>
+   <div class="box">
+     <legend><b><%= l(:tel_info) %></b></legend>
+     <% @person.jp_phone_numbers.each do |phone_number| %>
+       <p><%= phone_number.label %><%= phone_number.number %></p>
+     <% end %>
+   </div>
+ <% end %>
+ <% if @person.jp_e_mails.present? %>
+   <div class="box">
+     <legend><b><%= l(:email_info) %></b></legend>
+     <% @person.jp_e_mails.each do |e_mail| %>
+       <p><%= e_mail.label %><%= mail_to e_mail.mail_address %></p>
+     <% end %>
+   </div>
+ <% end %>
+ <% if @person.memo.present? %>
+   <div class="box">
+     <legend><b><%= l(:memo_info) %></b></legend>
+     <div class="wiki">
+       <%= textilizable @person.memo %>
+     </div>
+   </div>
+ <% end %>
+
+ <% content_for :sidebar do %>
+   <h3>情報</h3>
+   <h4>プロジェクトに追加</h4>
+   <%= form_tag('/projects_jp_people', remote: true) do %>
+     <%= hidden_field :projects_jp_people, :jp_person_id, value: @person.id %>
+     <p><%= collection_select :projects_jp_people, :project_id, Project.allowed_to(User.current), :id, :name %></p>
+     <p>関連 <%= text_field :projects_jp_people, :pp_relationship %></p>
+     <p><%= submit_tag l(:button_add) %></p>
+   <% end %>
+   <h4>関連するプロジェクト</h4>
+   <div id="projects_jp_people_table">
+     <%= render_projects_jp_people @person %>
+   </div>
+   <% if @project.present? %>
+     <h4>このプロジェクトから削除</h4>
+     <p>
+       <%= link_to l(:delete), @person.projects_jp_people.find_by(project_id: @project.id ), method: :delete,
+         data: {confirm: '本当に削除しますか'},
+         class: 'icon icon-del'%>
+     </p>
+   <% end %>
+ <% end %>
+ <div id="modal_area" class="hidden"></div>
+ <% html_title t(:show_person, name: @person.name) %>

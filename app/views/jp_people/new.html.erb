@@ -1,0 +1,13 @@
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'jp_address', :plugin => 'redmine_jp_address' %>
+<% end %>
+<div class="contextual">
+  <%= link_to l(:cancel), jp_people_path, class: 'icon icon-cancel' %>
+</div>
+<h2><%= l(:new_person)%></h2>
+<%= render 'form' %>
+<% content_for :sidebar do %>
+  <div></div>
+<% end %>
+
+<% html_title l(:new_person) %>

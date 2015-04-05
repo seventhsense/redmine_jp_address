@@ -1,0 +1,61 @@
+ja:
+  jp_people: 'アドレス帳'
+  people_index: "アドレス帳 一覧"
+  new_person: "新しいアドレス"
+  show_person: "%{name} | 詳細"
+  edit_person: "%{name} | 編集"
+  edit: "編集"
+  delete: "削除"
+  back: "戻る"
+  cancel: "キャンセル"
+  name: '名前'
+  phone: '電話番号'
+  email: 'メールアドレス'
+
+  activerecord:
+    models:
+      jp_person: 'アドレス'
+  helpers:
+    submit:
+      create: "%{model}の登録"
+      update: "%{model}の更新"
+  errors:
+    messages:
+      record_invalid: バリデーションに失敗しました。 %{errors}
+  prohibited_this_person_from_being_saved: "%{error_count}つのエラーが見つかりました"
+
+
+
+  basic_info: '基本情報'
+  address_info: '住所'
+  tel_info: '電話番号/ファックス'
+  email_info: 'メールアドレス'
+  memo_info: 'メモ'
+  field_name: '名前'
+  field_kana: 'かな'
+  field_is_corporate: '組織'
+  field_represent_katagaki: '代表者肩書き'
+  field_represent: '代表者名'
+  field_label: 'ラベル'
+  field_zip_code: '郵便番号'
+  field_todofuken: '都道府県'
+  field_address1: '市区町村'
+  field_address2: '丁目番地等'
+  field_building: '建物名・部屋番号'
+  field_number: '番号'
+  field_mail_address: 'メールアドレス'
+  field_pp_relationship: 'プロジェクトとの関連'
+  check_if_is_corporate: '法人の場合はチェック'
+
+  add_address: '住所追加'
+  add_phone_number: '電話番号追加'
+  add_email_address: 'メールアドレス追加'
+
+  notice_create_person: "%{name}のアドレスを作成しました."
+  notice_update_person: "%{name}のアドレスを更新しました."
+  notice_destroy_person: "%{name}のアドレスを削除しました."
+  delete_confirm_message: "%{name}のアドレスを削除しますか？"
+
+  project_module_jp_people: 'アドレス帳'
+  permission_view_jp_people: 'アドレス帳・アドレスの閲覧'
+  permission_edit_jp_people: 'アドレスの追加・編集'

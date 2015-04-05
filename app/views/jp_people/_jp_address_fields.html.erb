@@ -1,0 +1,11 @@
+<div class="field box tabular">
+  <p style="float:right; margin-right:1em;">
+    <%= f.link_to_remove image_tag 'false.png' %>
+  </p>
+  <p><%= f.label :label %><%= f.text_field :label %></p>
+  <p><%= f.label :zip_code %><%= f.text_field :zip_code, class: 'zip_code' %></p>
+  <p><%= f.label :todofuken %><%= f.select :todofuken, todofuken_name,{}, class: 'todofuken' %></p>
+  <p><%= f.label :address1 %><%= f.text_field :address1, size: 70, class: 'address1'%></p>
+  <p><%= f.label :address2 %><%= f.text_field :address2, size: 70, class: 'address2' %></p>
+  <p><%= f.label :building %><%= f.text_field :building, size: 50, class: 'building' %></p>
+</div>
