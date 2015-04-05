@@ -3,7 +3,7 @@ Redmine::Plugin.register :redmine_jp_address do
   author 'Seventh'
   description '日本向けのアドレス帳'
   version '0.0.1'
-  url 'http://example.com/path/to/plugin'
+  url 'https://github.com/seventhsense/redmine_jp_address'
   author_url 'http://blog.scimpr.com'
 
   # simple
