@@ -12,15 +12,15 @@
 
 <h2><%= t(:show_person, name: @person.name) %></h2>
 <div class="box">
-  <legend><b><%= l(:basic_info) %></b></legend>
+  <h3><%= l(:basic_info) %></h3>
   <p><%= @person.name %></p>
   <p><%= @person.kana %></p>
 </div>
 <% if @person.jp_addresses.present? %>
   <div class="box">
-    <legend><b><%= l(:address_info) %></b></legend>
+    <h3><%= l(:address_info) %></h3>
     <% @person.jp_addresses.each do |address| %>
-      <p><%= address.label %></p>
+      <h4><%= address.label %></h4>
       <p>〒 <%= address.zip_code %></p>
       <p><%= address.todofuken %>
       <%= address.address1 %>
@@ -31,15 +31,16 @@
  <% end %>
  <% if @person.jp_phone_numbers.present? %>
    <div class="box">
-     <legend><b><%= l(:tel_info) %></b></legend>
+     <h3><%= l(:tel_info) %></h3>
      <% @person.jp_phone_numbers.each do |phone_number| %>
-       <p><%= phone_number.label %><%= phone_number.number %></p>
+       <h4><%= phone_number.label %></h4>
+       <p><%= phone_number.number %></p>
      <% end %>
    </div>
  <% end %>
  <% if @person.jp_e_mails.present? %>
    <div class="box">
-     <legend><b><%= l(:email_info) %></b></legend>
+     <h3><%= l(:email_info) %></h3>
      <% @person.jp_e_mails.each do |e_mail| %>
        <p><%= e_mail.label %><%= mail_to e_mail.mail_address %></p>
      <% end %>
@@ -47,7 +48,7 @@
  <% end %>
  <% if @person.memo.present? %>
    <div class="box">
-     <legend><b><%= l(:memo_info) %></b></legend>
+     <h3><%= l(:memo_info) %></h3>
      <div class="wiki">
        <%= textilizable @person.memo %>
      </div>
