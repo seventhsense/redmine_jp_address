@@ -5,12 +5,9 @@
     <thead>
       <% if @project.present? %>
         <th><%= l(:field_pp_relationship) %></th>
-        <%= sort_header_tag 'jp_people.name', caption: l(:field_name)%>
-        <%= sort_header_tag 'jp_people.kana', caption: l(:field_kana)%>
-      <% else %>
-        <%= sort_header_tag 'name', caption: l(:field_name)%>
-        <%= sort_header_tag 'kana', caption: l(:field_kana)%>
       <% end %>
+      <%= sort_header_tag 'jp_people.name', caption: l(:field_name)%>
+      <%= sort_header_tag 'jp_people.kana', caption: l(:field_kana)%>
       <th><%= l(:field_number)%></th>
       <th><%= l(:field_mail_address)%></th>
     </thead>

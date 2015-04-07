@@ -7,18 +7,23 @@ class JpPeopleController < ApplicationController
   before_action :set_project #, :only => [:index, :new, :create, :edit, :update] 
 
   def index
-    if @project.present?
-      sort_init 'jp_people.kana', 'desc'
-      sort_update %w(jp_people.name jp_people.kana)
-      @people = JpPerson.search_by_project_id(@project.id).order(sort_clause)
-    else 
-      sort_init 'kana', 'desc'
-      sort_update %w(name kana)
-      @people = JpPerson.order(sort_clause)
+    @q ||= params[:q]
+    sort_init 'jp_people.kana', 'desc'
+    sort_update %w(jp_people.name jp_people.kana)
+    @people = JpPerson.search_by_project_id(@project).search(@q).order(sort_clause)
+    if @people.blank?
+      @people = JpPerson.search_by_project_id(@project).phone_search(@q).order(sort_clause)
+    end
+    if @people.blank?
+      @people = JpPerson.search_by_project_id(@project).mail_search(@q).order(sort_clause)
     end
     @limit = per_page_option
     @people_count = @people.count
     @person_pages = Paginator.new @people_count, @limit, params['page']
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
@@ -72,28 +77,6 @@ class JpPeopleController < ApplicationController
   end
 
   def search
-    set_project
-    q = "%#{params[:q]}%"
-    searched_people = JpPerson.search(q)
-    if searched_people.blank?
-      searched_people = JpPerson.tel_and_mail_search(q)
-    end
-    if @project.present?
-      sort_init 'jp_people.kana', 'desc'
-      sort_update %w(jp_people.name jp_people.kana)
-      @people = searched_people.search_by_project_id(@project.id).order(sort_clause)
-    else 
-      sort_init 'kana', 'desc'
-      sort_update %w(name kana)
-      @people = searched_people.order(sort_clause)
-    end
-    @limit = per_page_option
-    @people_count = @people.count
-    @person_pages = Paginator.new @people_count, @limit, params['page']
-
-    respond_to do |format|
-      format.js
-    end
   end
 
   private

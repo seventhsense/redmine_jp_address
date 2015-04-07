@@ -28,15 +28,32 @@ class JpPerson < ActiveRecord::Base
 
   #scope
   def self.search(q)
-    where('jp_people.name LIKE :q OR jp_people.kana LIKE :q', q: q)
+    where('jp_people.name LIKE :q OR jp_people.kana LIKE :q', q: "%#{q}%")
+  end
+
+  def self.phone_search(q)
+    joins(:jp_phone_numbers)
+      .where('jp_phone_numbers.number LIKE :q', q: "%#{q}%")
+  end
+
+  def self.mail_search(q)
+    joins(:jp_e_mails)
+      .where('jp_e_mails.mail_address LIKE :q', q: "%#{q}%")
   end
 
   def self.tel_and_mail_search(q)
       joins(:jp_e_mails, :jp_phone_numbers)
-        .where('jp_e_mails.mail_address LIKE :q OR jp_phone_numbers.number LIKE :q', q: q)
+        .where('jp_e_mails.mail_address LIKE :q OR jp_phone_numbers.number LIKE :q', q: "%#{q}%")
   end
 
-  def self.search_by_project_id(project_id)
-    includes(:projects).where('projects.id' => project_id)
+  def self.search_by_project_id(project)
+    if project
+      includes(:projects).where('projects.id' => project.id)
+    else
+      where(nil)
+    end
   end
+
+  # scope :search_by_project_id ,
+    # -> (project_id){includes(:projects).where('projects.id' => project_id)}
 end
