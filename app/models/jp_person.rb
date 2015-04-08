@@ -50,7 +50,7 @@ class JpPerson < ActiveRecord::Base
     if project
       includes(:projects).where('projects.id' => project.id)
     else
-      where(nil)
+      all
     end
   end
 
