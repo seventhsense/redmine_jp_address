@@ -24,7 +24,7 @@ class ProjectsJpPeopleController < ApplicationController
 
   private
   def projects_jp_people_params
-    params.require(:projects_jp_people)
-      .permit(:project_id, :jp_person_id, :pp_relationship)
+    params.require(:projects_jp_person)
+      .permit(:project_id, :jp_person_id, :pp_relationship, :is_project_owner)
   end
 end

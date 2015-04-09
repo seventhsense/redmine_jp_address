@@ -58,11 +58,12 @@
  <% content_for :sidebar do %>
    <h3>情報</h3>
    <h4>プロジェクトに追加</h4>
-   <%= form_tag('/projects_jp_people', remote: true) do %>
-     <%= hidden_field :projects_jp_people, :jp_person_id, value: @person.id %>
-     <p><%= collection_select :projects_jp_people, :project_id, Project.allowed_to(User.current), :id, :name %></p>
-     <p>関連 <%= text_field :projects_jp_people, :pp_relationship %></p>
-     <p><%= submit_tag l(:button_add) %></p>
+   <%= form_for(ProjectsJpPerson.new, remote: true) do |f| %>
+     <%= f.hidden_field :jp_person_id, value: @person.id %>
+     <p><%= f.collection_select :project_id, Project.allowed_to(User.current), :id, :name %></p>
+     <p>関連 <%= f.text_field :pp_relationship %></p>
+     <p>プロジェクトオーナー <%= f.check_box  :is_project_owner %></p>
+     <p><%= f.submit l(:button_add) %></p>
    <% end %>
    <h4>関連するプロジェクト</h4>
    <div id="projects_jp_people_table">

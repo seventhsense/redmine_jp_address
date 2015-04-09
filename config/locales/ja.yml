@@ -45,6 +45,7 @@ ja:
   field_number: '番号'
   field_mail_address: 'メールアドレス'
   field_pp_relationship: 'プロジェクトとの関連'
+  field_is_project_owner: 'プロジェクトオーナー'
   check_if_is_corporate: '法人の場合はチェック'
 
   add_address: '住所追加'

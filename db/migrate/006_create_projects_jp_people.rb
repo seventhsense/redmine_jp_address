@@ -4,6 +4,7 @@ class CreateProjectsJpPeople < ActiveRecord::Migration
       t.integer :project_id
       t.integer :jp_person_id
       t.string :pp_relationship
+      t.boolean :is_project_owner
 
       t.index :project_id
       t.index :jp_person_id
