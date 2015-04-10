@@ -99,7 +99,7 @@ class JpPeopleController < ApplicationController
                                         :address1, :address2, :building, :_destroy],
               jp_e_mails_attributes: [:id, :label, :mail_address, :_destroy],
               jp_phone_numbers_attributes: [:id, :label, :number, :_destroy],
-              projects_jp_people_attributes: [:id, :project_id, :jp_people_id, :pp_relationship]
+              projects_jp_people_attributes: [:id, :project_id, :jp_people_id, :pp_relationship, :is_project_owner]
              )
   end
 

@@ -2,7 +2,7 @@ Redmine::Plugin.register :redmine_jp_address do
   name 'Redmine JP Address'
   author 'Seventh'
   description '日本向けのアドレス帳'
-  version '0.1.2'
+  version '0.2.0'
   url 'https://github.com/seventhsense/redmine_jp_address'
   author_url 'http://blog.scimpr.com'
 
