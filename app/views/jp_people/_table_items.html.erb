@@ -4,6 +4,7 @@
   <table class="list">
     <thead>
       <% if @project.present? %>
+        <th><%= l(:field_is_project_owner) %></th>
         <th><%= l(:field_pp_relationship) %></th>
       <% end %>
       <%= sort_header_tag 'jp_people.name', caption: l(:field_name)%>
@@ -14,6 +15,7 @@
     <% @people.each do |person| %>
       <tr>
         <% if @project.present? %>
+          <td><%= "●" if person.projects_jp_people.find_by(project_id: @project.id).is_project_owner %></td>
           <td><%= person.projects_jp_people.find_by(project_id: @project.id).pp_relationship%></td>
           <td><%= link_to person.name, project_jp_person_path(project_id: @project.id, id: person.id) %></td>
         <% else %>

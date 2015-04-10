@@ -3,7 +3,7 @@
 <% end %>
 
 <div class="contextual">
-  <% if @project == nil %>
+  <% if @project.nil? %>
     <%= link_to l(:new_person), new_jp_person_path, class: 'icon icon-add' %>
   <% else %>
     <%= link_to l(:new_person), new_project_jp_person_path, class: 'icon icon-add' %>

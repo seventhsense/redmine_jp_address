@@ -2,6 +2,7 @@
   <table>
     <thead>
       <tr>
+        <th></th>
         <th>関連</th>
         <th>プロジェクト名</th>
       </tr>
@@ -9,6 +10,7 @@
     <tbody>
       <% person.projects_jp_people.each do |p| %>
         <tr>
+          <td><%= "●" if p.is_project_owner %></td>
           <td><%= p.pp_relationship %></td>
           <td><%= link_to p.project.name, p.project %></td>
         </tr>
