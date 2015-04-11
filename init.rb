@@ -2,7 +2,7 @@ Redmine::Plugin.register :redmine_jp_address do
   name 'Redmine JP Address'
   author 'Seventh'
   description '日本向けのアドレス帳'
-  version '0.4.0'
+  version '0.4.1'
   url 'https://github.com/seventhsense/redmine_jp_address'
   author_url 'http://blog.scimpr.com'
 
@@ -13,9 +13,6 @@ Redmine::Plugin.register :redmine_jp_address do
     'empty' => true
   }, partial: 'settings/jp_address_settings'
 
-  
-  # simple
-  ActiveSupport::Dependencies.autoload_paths += [File.dirname(__FILE__) + "/assets/stylesheets"]
   menu :top_menu, :redmine_jp_address, {:controller => 'jp_people', :action => 'index', project_id: nil},
     :caption => 'アドレス帳'
   permission :view_jp_people, jp_people: [:index, :show]

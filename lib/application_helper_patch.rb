@@ -1,5 +1,3 @@
-require 'application_helper'
-
 module ApplicationHelperPatch
   def link_to_project(project, options={}, html_options = nil)
     if project.archived?
@@ -16,7 +14,6 @@ module ApplicationHelperPatch
         html_options
     end
   end
-
 end
 
 
