@@ -66,7 +66,7 @@ class JpPeopleController < ApplicationController
 
   def add
     @query ||= ''
-    @candidates = JpPerson.where.not(id: Project.find(@project.id).jp_people.pluck(:id)).search(@query).limit(8)
+    @candidates = JpPerson.not_added(@project).search(@query).limit(8)
   end
 
   def add_people
@@ -84,9 +84,7 @@ class JpPeopleController < ApplicationController
 
   def search_people
     @query = params[:query]
-    logger.debug @query
-    @candidates = JpPerson.where.not(id: Project.find(@project.id).jp_people.pluck(:id)).search(@query).limit(8)
-    logger.debug @candidates.each {|p| p.name}
+    @candidates = JpPerson.not_added(@project).search(@query).limit(8)
     respond_to do |format|
       format.js
     end
@@ -126,7 +124,7 @@ class JpPeopleController < ApplicationController
     params.require(:jp_person)
       .permit(:name, :kana, :is_corporate, :represent, :represent_katagaki, :memo,
               jp_addresses_attributes: [:id, :label, :zip_code, :todofuken,
-                                        :address1, :address2, :building, :_destroy],
+                                        :address1, :address2, :building, :corporate, :_destroy],
               jp_e_mails_attributes: [:id, :label, :mail_address, :_destroy],
               jp_phone_numbers_attributes: [:id, :label, :number, :_destroy],
               projects_jp_people_attributes: [:id, :project_id, :jp_people_id, :pp_relationship, :is_project_owner]

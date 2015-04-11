@@ -18,6 +18,10 @@
   <h3><%= l(:basic_info) %></h3>
   <p><%= @person.name %></p>
   <p><%= @person.kana %></p>
+  <% if @person.is_corporate %>
+    <p><%= @person.represent_katagaki %>
+    <%= @person.represent %></p>
+  <% end %>
 </div>
 <% if @person.jp_addresses.present? %>
   <div class="box">
@@ -29,6 +33,7 @@
       <%= address.address1 %>
       <%= address.address2 %></p>
     <p><%= address.building %></p>
+    <p><%= address.corporate %></p>
   <% end %>
 </div>
  <% end %>

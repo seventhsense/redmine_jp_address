@@ -7,6 +7,7 @@ class CreateJpAddresses < ActiveRecord::Migration
       t.string :address1
       t.string :address2
       t.string :building
+      t.string :corporate
       t.integer :jp_person_id
 
       t.index :jp_person_id

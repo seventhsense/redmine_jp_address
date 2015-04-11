@@ -43,6 +43,7 @@ ja:
   field_address1: '市区町村'
   field_address2: '丁目番地等'
   field_building: '建物名・部屋番号'
+  field_corporate: '組織名'
   field_number: '番号'
   field_mail_address: 'メールアドレス'
   field_pp_relationship: 'プロジェクトとの関連'

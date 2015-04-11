@@ -54,6 +54,10 @@ class JpPerson < ActiveRecord::Base
     end
   end
 
+  def self.not_added(project)
+    where.not(id: Project.find(project.id).jp_people.pluck(:id))
+  end
+
   # scope :search_by_project_id ,
     # -> (project_id){includes(:projects).where('projects.id' => project_id)}
 end
