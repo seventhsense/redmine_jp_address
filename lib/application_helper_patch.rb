@@ -6,7 +6,7 @@ module ApplicationHelperPatch
       h(project.name)
     else
       project_owners = ProjectsJpPerson.where(project_id: project.id, is_project_owner: true)
-      if project_owners.present?
+      if project_owners.present? and Setting.plugin_redmine_jp_address['show_project_owner']
         link_title = "#{project_owners.map {|p| p.jp_person.name}.join(',')} - #{project.name}"
       else
         link_title = project.name

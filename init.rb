@@ -2,12 +2,17 @@ Redmine::Plugin.register :redmine_jp_address do
   name 'Redmine JP Address'
   author 'Seventh'
   description '日本向けのアドレス帳'
-  version '0.3.1'
+  version '0.4.0'
   url 'https://github.com/seventhsense/redmine_jp_address'
   author_url 'http://blog.scimpr.com'
 
   require_dependency 'project_patch'
   require_dependency 'application_helper_patch'
+
+  settings :default => {
+    'empty' => true
+  }, partial: 'settings/jp_address_settings'
+
   
   # simple
   ActiveSupport::Dependencies.autoload_paths += [File.dirname(__FILE__) + "/assets/stylesheets"]
