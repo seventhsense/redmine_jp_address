@@ -4,7 +4,6 @@
   <table class="list">
     <thead>
       <% if @project.present? %>
-        <th><%= l(:field_is_project_owner) %></th>
         <th><%= l(:field_pp_relationship) %></th>
       <% end %>
       <%= sort_header_tag 'jp_people.name', caption: l(:field_name)%>
@@ -15,15 +14,15 @@
     <% @people.each do |person| %>
       <tr>
         <% if @project.present? %>
-          <td><%= "●" if person.projects_jp_people.find_by(project_id: @project.id).is_project_owner %></td>
-          <td><%= person.projects_jp_people.find_by(project_id: @project.id).pp_relationship%></td>
+          <td><%= content_tag :span, "●", class: :is_project_owner if person.projects_jp_people.find_by(project_id: @project.id).is_project_owner %>
+          <%= person.projects_jp_people.find_by(project_id: @project.id).pp_relationship%></td>
           <td><%= link_to person.name, project_jp_person_path(project_id: @project.id, id: person.id) %></td>
         <% else %>
           <td><%= link_to person.name, person %></td>
         <% end %>
         <td><%= person.kana %></td>
-        <td><%= person.jp_phone_numbers.first.number unless person.jp_phone_numbers.first == nil %></td>
-        <td><%= person.jp_e_mails.first.mail_address unless person.jp_e_mails.first == nil %></td>
+        <td><%= person.jp_phone_numbers.first.number if person.jp_phone_numbers.first.present? %></td>
+        <td><%= person.jp_e_mails.first.mail_address if person.jp_e_mails.first.present? %></td>
       </tr>
     <% end %>
   </table>

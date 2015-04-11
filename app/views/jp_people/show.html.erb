@@ -1,3 +1,6 @@
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'jp_address', :plugin => 'redmine_jp_address' %>
+<% end %>
 <div class="contextual">
   <% if @project.present? %>
     <%= link_to l(:edit), edit_project_jp_person_path, class: 'icon icon-edit' %> | 

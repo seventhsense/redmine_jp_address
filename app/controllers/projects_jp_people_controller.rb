@@ -8,7 +8,7 @@ class ProjectsJpPeopleController < ApplicationController
       @msg = @project_jp_person.project.name + "を追加しました."
     else
       @title = 'エラー'
-      @msg = "追加できません."
+      @msg = @project_jp_person.project.name + "を追加できません."
     end
     respond_to do |format|
       format.js

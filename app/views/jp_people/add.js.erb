@@ -1,0 +1,15 @@
+options = {
+  width: 500, 
+  height: 500, 
+  modal: true,
+  close: function(){
+    dialog.dialog("destroy");
+  }
+};
+$('#modal_area').html('<%= escape_javascript(render :partial => 'form_add_from_people', :locals => {:project => @project}) %>')
+  .hide()
+dialog = $('#dialog').dialog(options).show('blind')
+function cancel(){
+  dialog.dialog("close");
+  $('#modal_area').html('');
+}

@@ -6,7 +6,8 @@
   <% if @project.nil? %>
     <%= link_to l(:new_person), new_jp_person_path, class: 'icon icon-add' %>
   <% else %>
-    <%= link_to l(:new_person), new_project_jp_person_path, class: 'icon icon-add' %>
+    <%= link_to l(:new_person), new_project_jp_person_path, class: 'icon icon-add' %> |
+    <%= link_to l(:new_projects_jp_person), project_address_add_path(@project.id), remote: true, class: 'icon icon-add'%>
   <% end %>
 </div>
 
@@ -20,7 +21,11 @@
 <div id="index_table">
   <%= render 'table_items' %>
 </div>
+<% if @project.present? %>
+<p>* <span class="is_project_owner">●</span>はプロジェクトオーナー</p>
+<% end %>
 
+<div id="modal_area" class="hidden"></div>
 <% content_for :sidebar do %>
   <div></div>
 <% end %>

@@ -2,6 +2,7 @@ ja:
   jp_people: 'アドレス帳'
   people_index: "アドレス帳 一覧"
   new_person: "新しいアドレス"
+  new_projects_jp_person: "アドレス帳から追加"
   show_person: "%{name} | 詳細"
   edit_person: "%{name} | 編集"
   edit: "編集"

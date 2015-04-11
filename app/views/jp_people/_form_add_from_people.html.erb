@@ -1,0 +1,31 @@
+<div id="dialog" title="<%= l(:new_projects_jp_person) %>">
+  <% if project.jp_people.any? %>
+    <fieldset class="box">
+      <legend>プロジェクトに追加済みのアドレス</legend>
+      <%= project.jp_people.map {|person| person.name}.join(' , ')%>
+    </fieldset>
+  <% end %>
+  <fieldset class="box">
+   <%= text_field_tag :query,@query, id: 'query' %>
+   <%= form_tag controller: :jp_people, action: :add_people do %>
+     <div id="candidates">
+       <%= render partial: 'candidates', locals: {candidates: @candidates} %>
+     </div>
+     <%= submit_tag "追加" , class: 'button' %>
+     <button type="button" class="button" onClick="cancel();">Cancel</button>
+     <script>
+       $('.button').button();
+       $('#query').on("keyup", function(e){
+        query = $(this).val();
+        $.ajax({
+          url: "<%=j project_address_search_people_path %>",
+          type: 'POST',
+          data: {
+            query: query 
+          }
+        });
+       })
+     </script>
+   <% end %>
+  </fieldset>
+</div>

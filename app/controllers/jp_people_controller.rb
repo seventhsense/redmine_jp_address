@@ -48,7 +48,9 @@ class JpPeopleController < ApplicationController
   end
 
   def edit
-    @person.projects_jp_people.find_by(project_id: @project.id) unless @project == nil
+    if @project.present?
+      @person.projects_jp_people.find_by(project_id: @project.id)
+    end
   end
 
   def update
@@ -59,6 +61,34 @@ class JpPeopleController < ApplicationController
       else
         format.html { render :edit }
       end
+    end
+  end
+
+  def add
+    @query ||= ''
+    @candidates = JpPerson.where.not(id: Project.find(@project.id).jp_people.pluck(:id)).search(@query).limit(8)
+  end
+
+  def add_people
+    candidate_ids = params[:candidate][:id]
+    candidate_ids.each do |id|
+      @project.projects_jp_people.build(jp_person_id: id.to_i)
+    end
+    if @project.save!
+      msg = '追加しました.'
+    else
+      msg = '追加できませんでした.'
+    end
+    redirect_to project_jp_people_path(@project),notice: msg 
+  end
+
+  def search_people
+    @query = params[:query]
+    logger.debug @query
+    @candidates = JpPerson.where.not(id: Project.find(@project.id).jp_people.pluck(:id)).search(@query).limit(8)
+    logger.debug @candidates.each {|p| p.name}
+    respond_to do |format|
+      format.js
     end
   end
 

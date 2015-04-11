@@ -1,0 +1,16 @@
+<% if candidates.any? %>
+    <table>
+      <tr>
+        <td>追加</td>
+        <td>名前</td>
+      </tr>
+      <% candidates.each do |candidate| %>
+        <tr>
+          <td><%= check_box_tag 'candidate[id][]', candidate.id %></td>
+          <td><%= label_tag  candidate.name %> </td>
+        </tr>
+      <% end %>
+    </table>
+<% else %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>
