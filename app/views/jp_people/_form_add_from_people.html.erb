@@ -11,21 +11,21 @@
      <div id="candidates">
        <%= render partial: 'candidates', locals: {candidates: @candidates} %>
      </div>
-     <%= submit_tag "追加" , class: 'button' %>
-     <button type="button" class="button" onClick="cancel();">Cancel</button>
-     <script>
-       $('.button').button();
+   <% end %>
+  </fieldset>
+     <%= submit_tag "追加" , class: 'button add' %>
+     <button type="button cancel" class="button" onClick="cancel();">Cancel</button>
+</div>
+<script>
+  $('.button').button();
        $('#query').on("keyup", function(e){
-        query = $(this).val();
-        $.ajax({
-          url: "<%=j project_address_search_people_path %>",
+         query = $(this).val();
+         $.ajax({
+           url: "<%=j project_address_search_people_path %>",
           type: 'POST',
           data: {
             query: query 
           }
-        });
+         });
        })
-     </script>
-   <% end %>
-  </fieldset>
-</div>
+</script>

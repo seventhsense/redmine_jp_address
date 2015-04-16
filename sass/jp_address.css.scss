@@ -29,4 +29,13 @@ div#index_table {
 .is_project_owner {
   color: blue;
 }
-
+#dialog .button {
+  padding: initial;
+}
+#dialog .button.add {
+  padding: 0.4em 1em;
+  color: #090;
+}
+#dialog .button.cancel {
+  color: #009;
+}
