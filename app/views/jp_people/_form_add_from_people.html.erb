@@ -5,16 +5,16 @@
       <%= project.jp_people.map {|person| person.name}.join(' , ')%>
     </fieldset>
   <% end %>
-  <fieldset class="box">
-   <%= text_field_tag :query,@query, id: 'query' %>
-   <%= form_tag controller: :jp_people, action: :add_people do %>
-     <div id="candidates">
-       <%= render partial: 'candidates', locals: {candidates: @candidates} %>
-     </div>
-   <% end %>
-  </fieldset>
-     <%= submit_tag "追加" , class: 'button add' %>
-     <button type="button cancel" class="button" onClick="cancel();">Cancel</button>
+    <%= text_field_tag :query,@query, id: 'query' %>
+    <%= form_tag controller: :jp_people, action: :add_people do %>
+      <fieldset class="box">
+        <div id="candidates">
+          <%= render partial: 'candidates', locals: {candidates: @candidates} %>
+        </div>
+      </fieldset>
+      <%= submit_tag "追加" , class: 'button add' %>
+      <button type="button cancel" class="button" onClick="cancel();">Cancel</button>
+    <% end %>
 </div>
 <script>
   $('.button').button();
@@ -28,4 +28,4 @@
           }
          });
        })
-</script>
+     </script>

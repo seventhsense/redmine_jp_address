@@ -14,8 +14,18 @@
     <% @people.each do |person| %>
       <tr>
         <% if @project.present? %>
-          <td><%= content_tag :span, "●", class: :is_project_owner if person.projects_jp_people.find_by(project_id: @project.id).is_project_owner %>
-          <%= person.projects_jp_people.find_by(project_id: @project.id).pp_relationship%></td>
+          <td>
+            <% pr = person.projects_jp_people %>
+            <% if this_person = pr.find_by(project_id: @project.id) %>
+              <%= content_tag :span, "●", class: :is_project_owner if this_person.is_project_owner %>
+
+              <%= this_person.pp_relationship%>
+            <% elsif this_person = pr.find_by(project_id: @parent_project.id)%>
+              <%= content_tag :span, "●", class: :is_project_owner if this_person.is_project_owner %>
+
+              <%= this_person.pp_relationship%>
+            <% end %>
+          </td>
           <td><%= link_to person.name, project_jp_person_path(project_id: @project.id, id: person.id) %></td>
         <% else %>
           <td><%= link_to person.name, person %></td>

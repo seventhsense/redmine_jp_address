@@ -48,7 +48,7 @@ class JpPerson < ActiveRecord::Base
 
   def self.search_by_project_id(project)
     if project
-      includes(:projects).where('projects.id' => project.id)
+      includes(:projects).where('projects.id' => [project.id, project.parent_id])
     else
       all
     end

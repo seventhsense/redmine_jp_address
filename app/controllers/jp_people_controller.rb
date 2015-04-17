@@ -111,7 +111,9 @@ class JpPeopleController < ApplicationController
   end
 
   def set_project
-    @project = Project.find(params[:project_id])
+    project_id = params[:project_id]
+    @project = Project.find(project_id)
+    @parent_project = Project.find(@project.parent_id) if @project.parent_id.present?
   rescue
     return
   end

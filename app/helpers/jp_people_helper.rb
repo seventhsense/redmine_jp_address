@@ -5,7 +5,7 @@ module JpPeopleHelper
   end
 
   def render_projects_jp_people(person)
-    logger.debug person
+    # logger.debug person
     render partial: 'projects_jp_people/index_table', :locals => {person: person}
   end
 end
