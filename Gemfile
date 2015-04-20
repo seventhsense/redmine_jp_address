@@ -5,6 +5,8 @@ gem 'jp_prefecture', '0.8.0'
 
 group :development do
   gem 'pry-rails'
+  gem 'awesome_print'
+  gem 'hirb'
 
   gem 'uglifier'
   gem 'compass'
