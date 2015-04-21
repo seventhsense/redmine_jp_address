@@ -2,12 +2,11 @@ Redmine::Plugin.register :redmine_jp_address do
   name 'Redmine JP Address'
   author 'Seventh'
   description '日本向けのアドレス帳'
-  version '0.5.3'
+  version '0.6.0'
   url 'https://github.com/seventhsense/redmine_jp_address'
   author_url 'http://blog.scimpr.com'
 
   require_dependency 'project_patch'
-  require_dependency 'application_helper_patch'
 
   settings :default => {
     'empty' => true

@@ -1,4 +1,8 @@
 <p>
-  <label>プロジェクトにプロジェクトオーナーを表示:</label>
+  <label>プロジェクト名にプロジェクトオーナーを表示:</label>
   <%= check_box_tag "settings[show_project_owner]", true, @settings['show_project_owner'] %>
+</p>
+<p>
+  <label>プロジェクト名に親プロジェクトのプロジェクトオーナーを表示:</label>
+  <%= check_box_tag "settings[show_parent_project_owner]", true, @settings['show_parent_project_owner'] %>
 </p>
