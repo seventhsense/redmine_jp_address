@@ -7,3 +7,5 @@ old_print = Pry.config.print
 Pry.config.print = proc do |output, value|
   Hirb::View.view_or_page_output(value) || old_print.call
 end
+
+AwesomePrint.pry!
