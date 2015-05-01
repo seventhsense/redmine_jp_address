@@ -8,7 +8,7 @@ class JpPeopleController < ApplicationController
 
   def index
     @q ||= params[:q]
-    sort_init 'jp_people.kana', 'desc'
+    sort_init 'jp_people.kana'
     sort_update %w(jp_people.name jp_people.kana)
     @people = JpPerson.search_by_project_id(@project).search(@q).order(sort_clause)
     if @people.blank?
