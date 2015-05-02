@@ -26,6 +26,17 @@ class JpPerson < ActiveRecord::Base
     end
   end
 
+  # acts_as_event datetime: :updated_at,
+    # description: :name,
+    # title: :name,
+    # url: Proc.new {|o| {controller: :jp_people_controller,
+                        # action: 'show',
+                        # id: o.id}}
+
+  # acts_as_searchable columns: ["jp_people.name", "jp_people.kana"],
+    # scope: :search_by_project_id,
+    # date_column: 'jp_people.created_at'
+
   #scope
   def self.search(q)
     where('jp_people.name LIKE :q OR jp_people.kana LIKE :q', q: "%#{q}%")

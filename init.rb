@@ -23,4 +23,6 @@ Redmine::Plugin.register :redmine_jp_address do
     permission :view_jp_people, jp_people: [:index, :show]
     permission :edit_jp_people, jp_people: [:create, :edit, :destroy]
   end
+
+  # Redmine::Search::available_search_types << 'jp_people'
 end
