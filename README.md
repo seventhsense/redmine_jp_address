@@ -1,3 +1,5 @@
+[![Dependency Status](https://gemnasium.com/badges/github.com/seventhsense/redmine_jp_address.svg)](https://gemnasium.com/github.com/seventhsense/redmine_jp_address)
+
 # redmine_jp_address
 Redmine用の日本向けのアドレス帳です.
 
